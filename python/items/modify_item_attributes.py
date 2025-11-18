@@ -10,3 +10,6 @@ def decrease_quality(item, decrease_by, lower_bound):
 
 def set_quality(item, value):
     item.quality = value
+    
+def decrease_sell_in(item, value):
+    item.sell_in-=value

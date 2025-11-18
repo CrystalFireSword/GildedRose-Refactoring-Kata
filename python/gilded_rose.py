@@ -3,7 +3,7 @@ from items.item_names_enum import ItemNames
 from items.aged_brie import update_quality_aged_brie
 from items.backstage import update_quality_backstage
 from items.conjured import update_quality_conjured
-from items.modify_item_quality import decrease_quality
+from items.modify_item_attributes import decrease_quality, decrease_sell_in
 
 class GildedRose(object):
     """
@@ -13,6 +13,7 @@ class GildedRose(object):
     __MIN_ITEM_QUALITY = 0 
     # items that do not have specific conditions for quality/sell_in modifications are regular
     __QUALITY_DECREMENT_REGULAR = 1
+    __SELL_IN_DECREMENT = 1
     
     def __init__(self, items):
         self.items = items
@@ -22,7 +23,7 @@ class GildedRose(object):
             if item.name==ItemNames.SULFURAS.value: 
                 continue            
             
-            self.__update_sell_in(item)
+            decrease_sell_in(item, GildedRose.__SELL_IN_DECREMENT)
             
             if item.name==ItemNames.AGED_BRIE.value:
                 update_quality_aged_brie(item, GildedRose.__MAX_ITEM_QUALITY) 
@@ -38,10 +39,6 @@ class GildedRose(object):
                     decrease_quality(item, GildedRose.__QUALITY_DECREMENT_REGULAR*2, GildedRose.__MIN_ITEM_QUALITY)
                 else:
                     decrease_quality(item, GildedRose.__QUALITY_DECREMENT_REGULAR, GildedRose.__MIN_ITEM_QUALITY)
-    
-    def __update_sell_in(self, item):
-        item.sell_in-=1
-        return
     
 class Item:
     def __init__(self, name, sell_in, quality):

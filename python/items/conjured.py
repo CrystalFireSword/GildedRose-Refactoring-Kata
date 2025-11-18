@@ -1,4 +1,4 @@
-from items.modify_item_quality import decrease_quality
+from items.modify_item_attributes import decrease_quality
 def update_quality_conjured(item, min_conjured_quality):      
     QUALITY_DECREMENT_CONJURED = 2
     if item.sell_in<0:

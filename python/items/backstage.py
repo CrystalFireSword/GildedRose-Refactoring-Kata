@@ -1,4 +1,4 @@
-from items.modify_item_quality import increase_quality, set_quality
+from items.modify_item_attributes import increase_quality, set_quality
 def update_quality_backstage(item, max_backstage_quality):
     """
     bounds on the number of days remaining to sell concert tickets, 

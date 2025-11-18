@@ -1,4 +1,4 @@
-from items.modify_item_quality import increase_quality
+from items.modify_item_attributes import increase_quality
 
 def update_quality_aged_brie(item, max_aged_brie_quality): 
     QUALITY_INCREMENT_AGED_BRIE = 1
