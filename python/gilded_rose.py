@@ -3,7 +3,8 @@ from items.item_names_enum import ItemNames
 from items.aged_brie import update_quality_aged_brie
 from items.backstage import update_quality_backstage
 from items.conjured import update_quality_conjured
-from items.modify_item_attributes import decrease_quality, decrease_sell_in
+from items.regular import update_quality_regular
+from items.modify_item_attributes import decrease_sell_in
 
 class GildedRose(object):
     """
@@ -34,11 +35,8 @@ class GildedRose(object):
             elif item.name==ItemNames.CONJURED.value:
                 update_quality_conjured(item, GildedRose.__MIN_ITEM_QUALITY)  
                               
-            else:                
-                if item.sell_in<0:
-                    decrease_quality(item, GildedRose.__QUALITY_DECREMENT_REGULAR*2, GildedRose.__MIN_ITEM_QUALITY)
-                else:
-                    decrease_quality(item, GildedRose.__QUALITY_DECREMENT_REGULAR, GildedRose.__MIN_ITEM_QUALITY)
+            else:              
+                update_quality_regular(item, GildedRose.__QUALITY_DECREMENT_REGULAR, GildedRose.__MIN_ITEM_QUALITY)
     
 class Item:
     def __init__(self, name, sell_in, quality):
