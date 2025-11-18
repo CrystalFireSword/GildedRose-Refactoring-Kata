@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-from enum import Enum
+from items.item_names_enum import ItemNames
 from items.aged_brie import update_quality_aged_brie
 from items.backstage import update_quality_backstage
 from items.conjured import update_quality_conjured
-
-class ItemNames(Enum):
-    AGED_BRIE = "Aged Brie"
-    CONJURED = "Conjured Mana Cake"
-    SULFURAS = "Sulfuras, Hand of Ragnaros"
-    BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
     
 class GildedRose(object):
     """
