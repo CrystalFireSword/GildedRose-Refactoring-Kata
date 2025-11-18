@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from enum import Enum
-from items.aged_brie import update_quality_Aged_Brie
+from items.aged_brie import update_quality_aged_brie
 from items.backstage import update_quality_backstage
 from items.conjured import update_quality_conjured
 
@@ -25,7 +25,7 @@ class GildedRose(object):
             if item.name==ItemNames.SULFURAS.value: 
                 pass            
             elif item.name==ItemNames.AGED_BRIE.value:
-                update_quality_Aged_Brie(item, GildedRose.__MAX_ITEM_QUALITY)            
+                update_quality_aged_brie(item, GildedRose.__MAX_ITEM_QUALITY)            
             elif item.name==ItemNames.BACKSTAGE.value:
                 update_quality_backstage(item, GildedRose.__MAX_ITEM_QUALITY)            
             elif item.name==ItemNames.CONJURED.value:
