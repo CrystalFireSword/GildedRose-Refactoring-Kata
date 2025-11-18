@@ -17,18 +17,28 @@ class GildedRose(object):
     def update_quality(self):
         for item in self.items:
             if item.name==ItemNames.SULFURAS.value: 
-                pass            
-            elif item.name==ItemNames.AGED_BRIE.value:
-                update_quality_aged_brie(item, GildedRose.__MAX_ITEM_QUALITY)            
+                continue            
+            
+            self.__update_sell_in(item)
+            
+            if item.name==ItemNames.AGED_BRIE.value:
+                update_quality_aged_brie(item, GildedRose.__MAX_ITEM_QUALITY) 
+                           
             elif item.name==ItemNames.BACKSTAGE.value:
                 update_quality_backstage(item, GildedRose.__MAX_ITEM_QUALITY)            
+
             elif item.name==ItemNames.CONJURED.value:
-                update_quality_conjured(item, GildedRose.__MIN_ITEM_QUALITY)                
-            else:            
-                item.sell_in-=1                
-                item.quality=max(item.quality-1, GildedRose.__MIN_ITEM_QUALITY)
+                update_quality_conjured(item, GildedRose.__MIN_ITEM_QUALITY)  
+                              
+            else:                
                 if item.sell_in<0:
+                    item.quality=max(item.quality-2, GildedRose.__MIN_ITEM_QUALITY)
+                else:
                     item.quality=max(item.quality-1, GildedRose.__MIN_ITEM_QUALITY)
+    
+    def __update_sell_in(self, item):
+        item.sell_in-=1
+        return
     
 class Item:
     def __init__(self, name, sell_in, quality):
