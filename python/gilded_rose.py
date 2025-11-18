@@ -7,11 +7,11 @@ from items.modify_item_attributes import decrease_quality, decrease_sell_in
 
 class GildedRose(object):
     """
-    Quality-related class variables
+    Quality-related class variables.
+    Items that do not have specific conditions for quality/sell_in modifications are regular
     """
     __MAX_ITEM_QUALITY = 50 
     __MIN_ITEM_QUALITY = 0 
-    # items that do not have specific conditions for quality/sell_in modifications are regular
     __QUALITY_DECREMENT_REGULAR = 1
     __SELL_IN_DECREMENT = 1
     
