@@ -1,22 +1,27 @@
 # -*- coding: utf-8 -*-
+from enum import Enum
 
+class ItemNames(Enum):
+    AGED_BRIE = "Aged Brie"
+    CONJURED = "Conjured Mana Cake"
+    SULFURAS = "Sulfuras, Hand of Ragnaros"
+    BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert"
+    
 class GildedRose(object):
     """
     Quality-related class variables
     """
     __MAX_ITEM_QUALITY = 50 
     __MIN_ITEM_QUALITY = 0
-    __MAX_AGED_BRIE_QUALITY = __MAX_ITEM_QUALITY
-    __MIN_CONJURED_QUALITY = __MIN_ITEM_QUALITY
     __MAX_SULFURAS_QUANTITY = 80    
     
     def __init__(self, items):
         self.items = items
         self.update_quality_special_products = {
-            "Aged Brie":self.__update_quality_Aged_Brie, 
-            "Conjured Mana Cake":self.__update_quality_conjured,
-            "Sulfuras, Hand of Ragnaros": self.__update_quality_Sulfuras, 
-            "Backstage passes to a TAFKAL80ETC concert": self.__update_quality_backstage, 
+            ItemNames.AGED_BRIE.value: self.__update_quality_Aged_Brie, 
+            ItemNames.CONJURED.value:self.__update_quality_conjured,
+            ItemNames.SULFURAS.value: self.__update_quality_Sulfuras, 
+            ItemNames.BACKSTAGE.value: self.__update_quality_backstage, 
             }
         
     def update_quality(self):
@@ -35,9 +40,9 @@ class GildedRose(object):
     
     def __update_quality_Aged_Brie(self, item):
         item.sell_in-=1
-        item.quality=min(item.quality+1, GildedRose.__MAX_AGED_BRIE_QUALITY)   
+        item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY)   
         if item.sell_in<0:     
-            item.quality=min(item.quality+1, GildedRose.__MAX_AGED_BRIE_QUALITY)   
+            item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY)   
         return
         
     def __update_quality_backstage(self, item):
@@ -72,9 +77,9 @@ class GildedRose(object):
     
     def __update_quality_conjured(self, item):
         item.sell_in-=1                  
-        item.quality=max(item.quality-2, GildedRose.__MIN_CONJURED_QUALITY)
+        item.quality=max(item.quality-2, GildedRose.__MIN_ITEM_QUALITY)
         if item.sell_in<0:
-            item.quality=max(item.quality-2, GildedRose.__MIN_CONJURED_QUALITY)
+            item.quality=max(item.quality-2, GildedRose.__MIN_ITEM_QUALITY)
         return
     
 class Item:
