@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from enum import Enum
 from items.aged_brie import update_quality_Aged_Brie
+from items.backstage import update_quality_backstage
 
 class ItemNames(Enum):
     AGED_BRIE = "Aged Brie"
@@ -19,7 +20,6 @@ class GildedRose(object):
         self.items = items
         self.update_quality_special_products = {
             ItemNames.CONJURED.value:self.__update_quality_conjured,
-            ItemNames.BACKSTAGE.value: self.__update_quality_backstage, 
             }
         
     def update_quality(self):
@@ -29,6 +29,10 @@ class GildedRose(object):
             
             if item.name==ItemNames.AGED_BRIE.value:
                 update_quality_Aged_Brie(item, GildedRose.__MAX_ITEM_QUALITY)
+                continue
+            
+            if item.name==ItemNames.BACKSTAGE.value:
+                update_quality_backstage(item, GildedRose.__MAX_ITEM_QUALITY)
                 continue
                 
             update_quality_special_product = self.update_quality_special_products.get(item.name)
@@ -42,39 +46,6 @@ class GildedRose(object):
             item.quality=max(item.quality-1, GildedRose.__MIN_ITEM_QUALITY)
             if item.sell_in<0:
                 item.quality=max(item.quality-1, GildedRose.__MIN_ITEM_QUALITY)
-    
-    def __update_quality_Aged_Brie(self, item):
-        item.sell_in-=1
-        item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY)   
-        if item.sell_in<0:     
-            item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY)   
-        return
-        
-    def __update_quality_backstage(self, item):
-
-        """
-        bounds on the number of days remaining to sell concert tickets, 
-        based on which quality is modified 
-        """        
-        CONCERT_DAYS_UB_1 = 10   
-        CONCERT_DAYS_UB_2 = 5  
-        
-        # decrement number of days left to sell
-        item.sell_in-=1
-        
-        if item.sell_in<0:
-            item.quality=0
-            return
-        
-        item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY) 
-
-        if item.sell_in<CONCERT_DAYS_UB_1:
-            item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY) 
-
-        if item.sell_in<CONCERT_DAYS_UB_2:
-            item.quality=min(item.quality+1, GildedRose.__MAX_ITEM_QUALITY)
-        
-        return 
     
     def __update_quality_conjured(self, item):
         item.sell_in-=1                  
