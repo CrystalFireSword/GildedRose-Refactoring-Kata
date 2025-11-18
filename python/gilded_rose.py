@@ -7,8 +7,6 @@ class GildedRose(object):
     __MAX_ITEM_QUALITY = 50 
     __MIN_ITEM_QUALITY = 0
     __MAX_AGED_BRIE_QUALITY = __MAX_ITEM_QUALITY
-    __MIN_AGED_BRIE_QUALITY = __MIN_ITEM_QUALITY
-    __MAX_CONJURED_QUALITY = __MAX_ITEM_QUALITY
     __MIN_CONJURED_QUALITY = __MIN_ITEM_QUALITY
     __MAX_SULFURAS_QUANTITY = 80    
     
@@ -46,9 +44,8 @@ class GildedRose(object):
 
         """
         bounds on the number of days remaining to sell concert tickets, 
-        based on which quality is modified differently
-        """
-        
+        based on which quality is modified 
+        """        
         CONCERT_DAYS_UB_1 = 10   
         CONCERT_DAYS_UB_2 = 5  
         
